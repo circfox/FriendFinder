@@ -9,6 +9,7 @@ var x = [
     name: "Manny",
     photo:
     "https://cdn20.patchcdn.com/users/22880693/20170413/044729/styles/T800x600/public/article_images/manny_pacquiao_2010-1492116382-2473.jpg",
+    scores: [5, 1, 2, 3, 3, 5, 4, 3, 4, 5]
   },
   {
     name: "Angelina",

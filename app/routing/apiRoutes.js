@@ -3,7 +3,7 @@ var path = require("path");
 
 // Import the list of friend entries
 var friends = require("../data/friends.js");
-
+//console.log(friends);
 // Export API routes
 module.exports = function(app) {
 	// console.log('___ENTER apiRoutes.js___');
@@ -20,8 +20,8 @@ module.exports = function(app) {
 		// console.log('userInput = ' + JSON.stringify(userInput));
 
 		var userResponses = userInput.scores;
-		// console.log('userResponses = ' + userResponses);
-
+		//  console.log('userResponses = ' + userResponses);
+		// console.log(userInput.scores);
 		// Compute best friend match
 		var matchName = '';
 		var matchImage = '';
@@ -30,12 +30,15 @@ module.exports = function(app) {
 		// Examine all existing friends in the list
 		for (var i = 0; i < friends.length; i++) {
 			// console.log('friend = ' + JSON.stringify(friends[i]));
-
+			//console.log(friends[i]);
 			// Compute differenes for each question
 			var diff = 0;
-			for (var j = 0; j < userResponses.length; j++) {
-				diff += Math.abs(friends[i].scores[j] - userResponses[j]);
+			for (var j = 0; j < userInput.scores.length; j++) {
+				// console.log(friends[i].scores[j]);
+				// console.log("userResponses = " + userResponses[j]);
+				diff += Math.abs(friends[i].scores[j] - parseInt(userResponses[j]));
 			}
+
 			// console.log('diff = ' + diff);
 
 			// If lowest difference, record the friend match
@@ -49,11 +52,12 @@ module.exports = function(app) {
 				matchImage = friends[i].photo;
 			}
 		}
-
+	console.log(matchName);
 		// Add new user
 		friends.push(userInput);
 
 		// Send appropriate response
 		res.json({status: 'OK', matchName: matchName, matchImage: matchImage});
+	//res.send(matchName);
 	});
 };
